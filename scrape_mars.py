@@ -30,3 +30,39 @@ def scrape():
     images_soup = BeautifulSoup(html, 'html.parser')
     relative_image_path = images_soup.find_all('img')[3]["src"]
     featured_image_url = jpl_nasa_url + relative_image_path
+
+    # Mars facts to be scraped, converted into html table
+    facts_url = 'https://space-facts.com/mars/'
+    tables = pd.read_html(facts_url)
+    mars_facts_df = tables[2]
+    mars_facts_df.columns = ["Description", "Value"]
+    mars_html_table = mars_facts_df.to_html()
+    mars_html_table.replace('\n', '')
+
+    # Mars hemisphere name and image to be scraped
+    usgs_url = 'https://astrogeology.usgs.gov'
+    hemispheres_url = 'https://astrogeology.usgs.gov/search/results?q=hemisphere+enhanced&k1=target&v1=Mars'
+    browser.visit(hemispheres_url)
+    hemispheres_html = browser.html
+    hemispheres_soup = BeautifulSoup(hemispheres_html, 'html.parser')
+    # Mars hemispheres products data
+    all_mars_hemispheres = hemispheres_soup.find('div', class_='collapsible results')
+    mars_hemispheres = all_mars_hemispheres.find_all('div', class_='item')
+    hemisphere_image_urls = []
+    # Iterate through each hemisphere data
+    for i in mars_hemispheres:
+        # Collect Title
+        hemisphere = i.find('div', class_="description")
+        title = hemisphere.h3.text        
+        # Collect image link by browsing to hemisphere page
+        hemisphere_link = hemisphere.a["href"]    
+        browser.visit(usgs_url + hemisphere_link)        
+        image_html = browser.html
+        image_soup = BeautifulSoup(image_html, 'html.parser')        
+        image_link = image_soup.find('div', class_='downloads')
+        image_url = image_link.find('li').a['href']
+        # Create Dictionary to store title and url info
+        image_dict = {}
+        image_dict['title'] = title
+        image_dict['img_url'] = image_url        
+        hemisphere_image_urls.append(image_dict)
