@@ -4,6 +4,8 @@ from bs4 import BeautifulSoup
 import pandas as pd
 import requests
 import pymongo
+from webdriver_manager.chrome import ChromeDriverManager
+
 
 def init_browser():
     executable_path = {'executable_path': ChromeDriverManager().install()}
@@ -28,7 +30,7 @@ def scrape():
     html = browser.html
     images_soup = BeautifulSoup(html, 'html.parser')
     relative_image_path = images_soup.find_all('img')[3]["src"]
-    featured_image_url = jpl_nasa_url + relative_image_path
+    featured_image_url = relative_image_path
 
     # Mars facts to be scraped, converted into html table
     facts_url = 'https://space-facts.com/mars/'
