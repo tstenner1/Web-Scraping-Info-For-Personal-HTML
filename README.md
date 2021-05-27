@@ -1,4 +1,4 @@
-# Web Scraping Homework - Mission to Mars
+# Web Scraping 
 
 Below is a trimmed down readme highlighting the specific skills executed in this assignment.
 
