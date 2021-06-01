@@ -36,7 +36,7 @@ Scraped using Jupyter Notebook, BeautifulSoup, Pandas, and Requests/Splinter.
 
 Used MongoDB with Flask templating to create a new HTML page that display all of the information that was scraped from the URLs above.
 
-* Converted the Jupyter notebook into a Python script called `scrape_mars.py` with a function called `scrape` to execute all of my scraping code from above and returned one Python dictionary containing all of the scraped data.
+* Converted the Jupyter notebook into a Python script called `scrape_mars.py` with a function called `scrape` to execute all of my scraped code from above and returned one Python dictionary containing all of the scraped data.
 
 * Next, I created a route called `/scrape` that imported  `scrape_mars.py` script and called my `scrape` function.
 
