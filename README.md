@@ -1,8 +1,6 @@
 # Web Scraping 
 
-Below is a trimmed down readme highlighting the specific skills executed in this assignment.
-
-* Build a web application that scrapes various websites for data related to the Mission to Mars and displays the information in a single HTML page. 
+* For this assignment I built a web application that scraped various websites for data related to the Mission to Mars and displayed the information in a single HTML page. 
 
 ## Scraping
 
